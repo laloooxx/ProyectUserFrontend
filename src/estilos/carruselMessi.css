@@ -1,0 +1,33 @@
+/* carruselMessi.css */
+
+/* Estilo para el contenedor del carrusel */
+.card {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+/* Estilo para las imágenes en el carrusel */
+.galleria-item img {
+  width: 100%; /* Ajusta el ancho de las imágenes */
+  height: auto; /* Ajusta la altura de las imágenes */
+  border-radius: 10px; /* Agrega bordes redondeados a las imágenes */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Agrega sombra a las imágenes */
+}
+
+/* Estilo para los navegadores de elementos del carrusel */
+.galleria-nav-prev, .galleria-nav-next {
+  background-color: #007bff; /* Cambia el color de fondo de los navegadores */
+  color: #fff; /* Cambia el color del texto de los navegadores */
+  border-radius: 50%; /* Hace que los navegadores sean redondos */
+  padding: 10px; /* Ajusta el espaciado interno de los navegadores */
+}
+
+/* Estilo para los navegadores de miniaturas del carrusel */
+.galleria-thumbnail-nav-prev, .galleria-thumbnail-nav-next {
+  background-color: #007bff; /* Cambia el color de fondo de los navegadores de miniaturas */
+  color: #fff; /* Cambia el color del texto de los navegadores de miniaturas */
+  border-radius: 50%; /* Hace que los navegadores de miniaturas sean redondos */
+  padding: 5px; /* Ajusta el espaciado interno de los navegadores de miniaturas */
+}

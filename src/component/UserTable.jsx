@@ -1,26 +1,48 @@
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+import { Link } from "react-router-dom";
 import useUsers from "../hooks/useUsers";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+
+/**
+ * Usamos un inline style para dar estilos 
+ */
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+  smallButton: {
+    padding: '4px 8px',
+    minWidth: 'unset',
+  }
+}));
 
 export default function UserTable() {
-  //usamos el get del servicio y lo guardamos en "lista"
+
+    const classes = useStyles();
+
+    //creamos una variable para almacenar los usuarios traidos con el hook personalizado useUsers y preguntamos si esta vacia
     const lista = useUsers();
     console.log(lista);
-    const users = lista.users
+    
 
     if (lista.length === 0){
-        return (
-        <h1>Cargando usuarios</h1>
-        )
-    }else{
+      return <h1>Cargando usuarios</h1>;
+    }
+
+    const users = lista.users;
+
     return (
 
-      //aca creamos una tabla para mostrar los usuarios
+      //aca creamos una tabla para mostrar los usuarios, usando el LinkTo de react-router-dom, definimos las rutas de los botones q creamos
+      //para eliminar y actualizar usuarios
       <table>
-         <thead>
+        <thead>
           <tr>
-            <th>Username</th>
-            <th>Email</th>
+            <th>Username</th> 
+            <th>Email</th> 
           </tr>
         </thead>
         <tbody>
@@ -28,10 +50,32 @@ export default function UserTable() {
             <tr key={user.id}>
               <td>{user.username}</td>
               <td>{user.email}</td>
+              <td>
+                <Link to={`/actualizarUsuario/${user.id}`}>
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={`${classes.smallButton} ${classes.button}`}
+                    startIcon={<CloudUploadIcon />}
+                    >
+                    Actualizar
+                  </Button>
+                </Link>
+              </td>
+              <td>
+                <Link to={`/eliminarUsuario/${user.id}`}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={`${classes.smallButton} ${classes.button}`}
+                    startIcon={<DeleteIcon />}
+                    >
+                    Eliminar
+                  </Button>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
-    )
-  }
-}
+    )}

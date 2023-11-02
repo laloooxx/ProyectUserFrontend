@@ -7,7 +7,6 @@ export default function CreateUsers() {
         username: '',
         password: '',
         email: '',
-        uuid: 0
     }]);
 
     useEffect(() => {

@@ -6,11 +6,11 @@ import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { Link } from 'react-router-dom'
-import Login from '../../pages/Login';
+import { Home } from "@material-ui/icons";
 
 
 
-function UserForm() {
+function FormLogin() {
 
     //creamos los estados de los valores q vamos a recibir para poder actualziar
     const [username, setUsername] = useState("")
@@ -62,12 +62,12 @@ function UserForm() {
                 <span className="p-float-label">
                     <Password value={password} onChange={(e) => setPassword(e.target.value)}  />
                 </span>
-                <Button type="submit" label="Registrar" />
+                <Button type="submit" label="Iniciar Sesion" />
             </form>
 
-            <Link to={ <Login /> }>Tienes cuenta? Inicia sesion</Link>
+            <Link to={ <Home /> }>No tienes cuenta? Registrate!!!</Link>
         </div>
     )
 };
 
-export default UserForm;
+export default FormLogin;

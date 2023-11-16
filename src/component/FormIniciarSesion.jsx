@@ -39,10 +39,19 @@ function FormLogin() {
         try {
             //guardamos en una constante la verificacion de datos
             const response = await verifyUser(data);
-            console.log(response);
-            const result = response.data;
+            console.log("resp de la data con el token del verifyuser ",response.data.token);
+            
+            
+            const token = response.data.token;
+            localStorage.setItem('token', token);
 
-            console.log(data);
+
+            const { id } = ParseToken(token);
+            console.log('id:', id);
+
+            const result = response.data;
+            console.log("respuesto del verify user con la data ", result);
+
             //seteamos los datos y definimos q es un array
             setUsers(prev => {
                 if (Array.isArray(prev)) {
@@ -59,9 +68,8 @@ function FormLogin() {
                 localStorage.setItem('token', result.token)
 
                 //estas lineas de codigo son para el perfil de usuario 
-                const userData = await getUserById({ userId: ParseToken(result.token).userId });
+                const userData = await getUserById(ParseToken(result.token).id );
 
-                // const datos = await getUserById(userId);
                 loginUser(userData);
                 setLoggin(true);
 

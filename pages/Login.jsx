@@ -25,7 +25,11 @@ export function ParseToken(token) {
           );
     
           //decodificamos la cadena y se analiza y se convierte a un objeto JavaScript
-          return JSON.parse(jsonPayload);
+          const decodedObject = JSON.parse(jsonPayload);
+
+          console.log('Parsed Token:', decodedObject);
+
+          return decodedObject;
         } else {
           console.error('El token es nulo');
           return null; // Otra acción apropiada

@@ -41,9 +41,16 @@ export default function UserContextProvider({ children }) {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const userData = await getUserById({ userId: ParseToken(token).userId });
-                    console.log(userData);
-                    loginUser(userData);
+                    const { id } = ParseToken(token);
+                    console.log("id del contexto ",id);
+                    if (id) {
+                        const userData = await getUserById( id );
+                        console.log(userData);
+                        loginUser(userData);
+                    } else {
+                        console.error('El id es undefined');
+                        logoutUser();
+                    }
                 } catch (error) {
                     console.error('Error al cargar el usuario almacenado:', error);
                     logoutUser();
@@ -51,7 +58,7 @@ export default function UserContextProvider({ children }) {
             }
             setLoading(false);
         }
-
+    
         cargarUsuarioAlmacenado();
     }, []);
     

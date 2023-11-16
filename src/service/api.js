@@ -23,14 +23,24 @@ export async function getUsers() {
 }
 
 
-export async function getUserById({userId}) {
-    const url = `${API_URL_Users}/${userId}`;
+export async function getUserById(id) {
+    if (!id) {
+        console.error('El id no está definido');
+        return null;
+    }
+
+    const url = `${API_URL_Users}/${id}`;
     try {
         const response = await axios.get(url);
         const userData = response.data;
 
+        if (userData.ok) {
+            return userData.user;
+        } else {
+            console.log('Usuario no encontrado:', userData.message);
+            return null
+        }
         console.log('Datos del usuario:', userData);
-        return userData;
     } catch (error) {
         console.log('error al hacer la peticion', error)
         throw error;
@@ -49,17 +59,17 @@ export async function createUser({username, password, email}) {
 
 
 /**
- * creamos la funcion para actualizar usuarios, pidiendo como parametros el userId y los valores necesarios
+ * creamos la funcion para actualizar usuarios, pidiendo como parametros el id y los valores necesarios
  */
-export async function updateUser(userId, userData) {
-    const url = `http://localhost:3000/api/users/${userId}`;
+export async function updateUser(id, userData) {
+    const url = `http://localhost:3000/api/users/${id}`;
     await axios.put(url, userData);
   }
   
 
-export async function deleteUser(userId) {
-    const url = `http://localhost:3000/api/users/${userId}`;
-    await axios.delete(url, userId);
+export async function deleteUser(id) {
+    const url = `http://localhost:3000/api/users/${id}`;
+    await axios.delete(url, id);
 };
 
 

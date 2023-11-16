@@ -4,6 +4,7 @@ import { PhotoService } from './service/PhotoService';
 import '../estilos/carruselMessi.css'
 
 
+//creamos un carrusel de prime con su respectivo archivo service
 export default function ItemWithoutThumbnailsDemo() {
     const [images, setImages] = useState(null);
 

@@ -1,13 +1,8 @@
-import { Container } from '@material-ui/core';
-import { Route, Routes, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Menu from './Menu';
 import Footer from './Footer';
-import CarruselMessi from '../src/component/Carrusel';
 
 
 
@@ -22,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CenteredGrid() {
+//creamos un menu de material-ui
+export default function InicioApp() {
   const classes = useStyles();
 
   return (

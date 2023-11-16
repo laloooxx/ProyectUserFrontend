@@ -5,10 +5,52 @@ import '../estilos/createdUser.css'
 import { InputText } from "primereact/inputtext";
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Login from '../../pages/Login';
 
 
+
+
+
+const required = (value) => {
+    if (!value) {
+        return (
+          <div className="alert alert-danger" role="alert">
+            This field is required!
+          </div>
+        );
+      }
+};
+
+const validEmail = (value) => {
+    if (!isEmail(value)) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          This is not a valid email.
+        </div>
+      );
+    }
+  };
+
+const vusername = (value) => {
+    if (value.length < 3 || value.length > 20) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          The username must be between 3 and 20 characters.
+        </div>
+      );
+    }
+};
+
+const vpassword = (value) => {
+    if (value.length < 6 || value.length > 40) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          The password must be between 6 and 40 characters.
+        </div>
+      );
+    }
+};
 
 function UserForm() {
 
@@ -16,15 +58,31 @@ function UserForm() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
-
-
+    
+    
     const { users, setUsers } = useContext(UserContext);
+    
 
+    const navigate = useNavigate();
+
+
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
+      };
+    const onChangeEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    };
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+      };
 
     //creando la funcion para crear usuarios con un formulario
     const handleSubmit = async (Event) => {
         //este metodo detiene la renderizacion automatica
-        // Event.preventDefault();
+        Event.preventDefault();
         //guardamos los valores q devuelve en una variable y decimos q espere a la peticion de la base de datos y seteamos los valores
         const data = {
             username,
@@ -34,7 +92,11 @@ function UserForm() {
         console.log(data);
         await createUser(data);
         setUsers(prev => [...prev, data])
+
+
+        navigate('/');
     };
+
 
 
     return (
@@ -46,7 +108,8 @@ function UserForm() {
                         id="email"
                         name="email"
                         value={email}
-                        onChange={(Event) => setEmail(Event.target.value)}
+                        onChange={ onChangeEmail }
+                        validations= {[required, validEmail]}
                     />
                     <label htmlFor ="email">Correo electronico</label>
                 </span>
@@ -55,17 +118,19 @@ function UserForm() {
                         id="username"
                         name="username"
                         value={username}
-                        onChange={(Event) => setUsername(Event.target.value)}
+                        onChange={ onChangeUsername }
+                        validateOnly= {[required, vusername]}
                     />
                     <label htmlFor ="username">Nombre de usuario</label>
                 </span>
                 <span className="p-float-label">
-                    <Password value={password} onChange={(e) => setPassword(e.target.value)}  />
+                    <Password value={password} onChange={ onChangePassword } validations={[required, vpassword]} />
+                    <label htmlFor="password">Contraseña</label>
                 </span>
                 <Button type="submit" label="Registrar" />
             </form>
 
-            <Link to={ <Login /> }>Tienes cuenta? Inicia sesion</Link>
+            <Link to="/">Tienes cuenta? Inicia sesión</Link>
         </div>
     )
 };

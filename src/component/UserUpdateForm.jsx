@@ -32,7 +32,7 @@ export default function UserUpdateForm() {
 
     //creamos una funcion asyncrona para cuando usemos el formulario 
     const handleSubmit = async (Event) => {
-
+        Event.preventDefault();
         const data = {
             username,
             password,
@@ -40,7 +40,23 @@ export default function UserUpdateForm() {
         };
 
         await updateUser(id ,data);
-        setUsers(prev => [...prev, data])
+
+        setUsers(prevUsers => {
+          if (Array.isArray(prevUsers)){
+            const update_users = prevUsers.map(user => {
+              if (user.id === id) {
+                return { ...user, ...data };
+              }
+              return user;
+            });
+            return update_users;
+          } else {
+            console.error("Users is not an array"); 
+            return prevUsers
+          }
+        })
+
+        // setUsers(prev => [...prev, data])
     };
 
 

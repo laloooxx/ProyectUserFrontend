@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,9 +7,12 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { Link, useNavigate } from 'react-router-dom';
-import AppRoutes from '../src/routes/Routes';
+import ItemWithoutThumbnailsDemo from '../src/component/Carrusel';
+import UserTable from '../src/component/UserTable';
+import UserProfile from '../src/component/UserProfile';
+import LogOutUser from '../src/component/LogOutUser';
 
-function TabPanel(props) {
+function TabPanel(props) {  
   const { children, value, index, ...other } = props;
 
   return (
@@ -39,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
+    position: 'fixed',
+    top: 0,
+    width: '100%'
   },
 }));
 
@@ -51,48 +57,56 @@ function a11yProps(index) {
   }
 
 
+//menu de material-ui
 export default function Menu() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState('carrusel');
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+
+  const handleTabClick = (event, newValue) => {
+    setCurrentPage(newValue);
   };
+
+  
+  const classes = useStyles();
+
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs
-          value={value}
-          onChange={handleChange}
+          value = {currentPage}
+          onChange={handleTabClick}
           aria-label="nav tabs example"
         >
           <Tab
             label="Inicio"
-            onClick={() => navigate('/inicio-carrusel')}
-            {...a11yProps(0)}
+            value = "carrusel"
           />
           <Tab
             label="Lista de Usuarios"
-            onClick={() => navigate('/usuarios')}
-            {...a11yProps(1)}
+            value = "usuarios"
           />
           <Tab
-            label="Crear Usuario"
-            onClick={() => navigate('/crear-usuario')}
-            {...a11yProps(2)}
+            label="Perfil de Usuario"
+            value = "perfil"
+          /> 
+          <Tab
+            label= "Cerrar sesion"
+            value="cerrar sesion"
           />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <AppRoutes />
+      <TabPanel value={currentPage} index="carrusel">
+        <ItemWithoutThumbnailsDemo />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <AppRoutes />
+      <TabPanel value={currentPage} index="usuarios">
+        <UserTable />
       </TabPanel>
-      <TabPanel value={value} index={2}>
-          <AppRoutes />
+      <TabPanel value={currentPage} index="perfil">
+        <UserProfile />
+      </TabPanel> 
+      <TabPanel value={currentPage} index="cerrar sesion">
+        <LogOutUser />
       </TabPanel>
     </div>
   );

@@ -16,7 +16,6 @@ function UserProfile() {
     }
 
     //Añadimos una verificacion antes de usar el substring paraa asegurar que solo intentamos acceder a substring si userData.accessToken está definido
-    const tokenSubstring = userLogeado.accessToken ? userLogeado.accessToken.substring(0, 20) : "";
 
 
     const profileStyles = {
@@ -59,9 +58,6 @@ function UserProfile() {
                     <i className="pi pi-user" style={profileStyles.icon}></i>
                     </h3>
                 </header>
-                <p>
-                    <strong>Token:</strong> {tokenSubstring}
-                </p>
                 <p>
                     <strong>Id:</strong> {userLogeado.id}
                 </p>

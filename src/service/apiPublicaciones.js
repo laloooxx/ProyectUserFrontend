@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL_PUBLICACIONES = 'http://localhost:3000/api/publicaciones'
+const API_URL_PUBLICACIONES = 'http://localhost:3000/publicaciones'
 
 
 
@@ -10,8 +10,8 @@ export async function getPublicaciones() {
 };
 
 
-export async function getPublicacionesById(postId) {
-    const url = `${API_URL_PUBLICACIONES}/${postId}`;
+export async function getPublicacionesById(id) {
+    const url = `${API_URL_PUBLICACIONES}/${id}`;
     try {
         const response = await axios.get(url);
         const dataPost = response.data;
@@ -31,12 +31,12 @@ export async function createPublicacion({ fecha, descripcion, ubicacion, imagen}
 };
 
 
-export async function updatePublicacion({ postId, postData }) {
-    const url = `${API_URL_PUBLICACIONES}/${postId}`;
+export async function updatePublicacion({ id, postData }) {
+    const url = `${API_URL_PUBLICACIONES}/${id}`;
     await axios.put(url, postData);
 };
 
-export async function deletePublicacion( postId ) {
-    const url = `${API_URL_PUBLICACIONES}/${postId}`;
-    await axios.delete(url, postId);
+export async function deletePublicacion( id ) {
+    const url = `${API_URL_PUBLICACIONES}/${id}`;
+    await axios.delete(url, id);
 }

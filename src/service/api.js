@@ -2,7 +2,7 @@
 import axios from "axios";
 
 //creamos variables para almacenar los valores de nuestra bd
-const API_URL_Users = 'http://localhost:3000/api/users';
+const API_URL_Users = 'http://localhost:3000/users';
 
 //creamos la funcion para mostrar usuarios
 export async function getUsers() {
@@ -50,25 +50,26 @@ export async function getUserById(id) {
 
 //creamos la funcion para crear usuarios
 export async function createUser({username, password, email}) {
-
-    //llamamos al metodo post de nuestra API con axios
-    await axios.post('http://localhost:3000/api/users', { username, password, email })
-
-    return
-};
+    try {
+        const response = await axios.post('http://localhost:3000/users', { username, password, email });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 /**
  * creamos la funcion para actualizar usuarios, pidiendo como parametros el id y los valores necesarios
  */
 export async function updateUser(id, userData) {
-    const url = `http://localhost:3000/api/users/${id}`;
+    const url = `http://localhost:3000/users/${id}`;
     await axios.put(url, userData);
   }
   
 
 export async function deleteUser(id) {
-    const url = `http://localhost:3000/api/users/${id}`;
+    const url = `http://localhost:3000/users/${id}`;
     await axios.delete(url, id);
 };
 
@@ -77,7 +78,7 @@ export async function deleteUser(id) {
 
 //creamos la funcion para verificar usuarios en mi backend
 export async function verifyUser({ email, password }) {
-    const url = `http://localhost:3000/api/login`;
+    const url = `http://localhost:3000/login`;
 
     try {
         const response = await axios.post(url, { email, password });

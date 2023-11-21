@@ -27,12 +27,22 @@ export default function UserUpdateForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
 
     const { users, setUsers } = useContext(UserContext);
 
     //creamos una funcion asyncrona para cuando usemos el formulario 
     const handleSubmit = async (Event) => {
         Event.preventDefault();
+
+        if (!email || !password) {
+          if (!email) setEmailError("Correo electronico es obligatorio");
+          if (!password) setPasswordError("La contraseña es obligatoria");
+          return;
+      }
+
+      
         const data = {
             username,
             password,

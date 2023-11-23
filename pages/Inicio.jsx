@@ -5,7 +5,6 @@ import Menu from './Menu';
 import Footer from './Footer';
 import ItemWithoutThumbnailsDemo from '../src/component/Carrusel';
 import { useUserContext } from '../src/context/UserContext';
-import ScrollToTop from '../src/component/BarraNav';
 
 const useStyles = makeStyles((theme) => ({
   root: {

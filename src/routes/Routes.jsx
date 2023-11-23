@@ -11,14 +11,18 @@ import App from '../App';
 import UserProfile from '../component/UserProfile';
 import { ProtectedRoute } from './ProtectedRoutes';
 import PagesPosts from '../../pages/Publicaciones';
+import { useUserContext } from '../context/UserContext';
 
 
 //creamos un archivo para manejar las rutas de mi pagina, tenemos cada ruta definida para poder acceder a cada componente
 export default function AppRoutes() {
+    const { userLogeado } = useUserContext();
+    console.log(userLogeado);
     return (
             <Routes>
-                {/* <Route element={<ProtectedRoute />}> */}
+                <Route element={<ProtectedRoute />}>
                     <Route path='/app/*' element={<App />} />
+                </Route>
                     <Route path='/perfil' element={<UserProfile />} />
                     <Route path='/inicio/*' element={<InicioApp />} />
                     <Route path='/carrusel' element={<CarruselMessi />} />
@@ -27,7 +31,6 @@ export default function AppRoutes() {
                     <Route path='/usuarios' element = {<UserTable />} />
                     <Route path='/actualizarUsuario/:id'element= {<UserUpdateForm />} />
                     <Route path='/eliminarUsuario/:id'element= {<EliminarUser />} />
-                {/* </Route> */}
                 <Route path='*' element={<Login />} />
                 <Route path='/home' element={<Home />} />
             </Routes>

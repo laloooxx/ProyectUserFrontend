@@ -4,9 +4,9 @@ import { UserContext, useUserContext } from "../context/UserContext";
 
 export const ProtectedRoute = (children) => {
     //va a tener q verificar la informacion del usuario
-    const {LoginUser} = useUserContext();
-
-        if (!LoginUser) {
+    const {userLogeado} = useUserContext();
+    console.log(userLogeado);
+        if (!userLogeado) {
             return <Navigate to="/" replace /> 
         }
 

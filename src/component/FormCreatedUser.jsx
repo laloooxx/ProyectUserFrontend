@@ -112,6 +112,7 @@ function UserForm() {
           const response = await createUser(data);
           if (!response.ok) {
             const errorMessage = handleServerError(response);
+            return errorMessage;
           } else {
             setUsers((prev) => [...prev, data]);
             navigate('/');
@@ -169,7 +170,7 @@ function UserForm() {
                 </span>
                 <span className="p-float-label">
                     <Password value={password} onChange={ onChangePassword } toggleMask />
-                    <label htmlFor="password" style={{paddingLeft: '30px'}}>Contraseña</label>
+                    <label htmlFor="password" style={{paddingLeft: '80px'}}>Contraseña</label>
                 {passwordError && <div className="alert alert-danger">{passwordError}</div>}
                 </span>
                 <Button type="submit" label="Registrar" />

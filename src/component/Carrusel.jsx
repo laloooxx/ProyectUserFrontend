@@ -13,8 +13,9 @@ export default function ItemWithoutThumbnailsDemo() {
     }, []);
 
     const itemTemplate = (item) => {
-        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', display: 'block' }} />;
-    }
+        return <img src={item.itemImageSrc} alt={item.alt} style={{ width: '100%', height: 'auto', display: 'block' }} />;
+      }
+      
 
     const thumbnailTemplate = (item) => {
         return <img src={item.thumbnailImageSrc} alt={item.alt} style={{ display: 'block' }} />;

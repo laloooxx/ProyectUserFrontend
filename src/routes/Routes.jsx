@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import UserForm from '../component/FormCreatedUser';
 import UserTable from '../component/UserTable';
 import UserUpdateForm from '../component/UserUpdateForm';
@@ -9,22 +9,27 @@ import InicioApp from '../../pages/Inicio'
 import Home from '../../pages/Home';
 import App from '../App';
 import UserProfile from '../component/UserProfile';
+import { ProtectedRoute } from './ProtectedRoutes';
+import PagesPosts from '../../pages/Publicaciones';
 
 
 //creamos un archivo para manejar las rutas de mi pagina, tenemos cada ruta definida para poder acceder a cada componente
 export default function AppRoutes() {
     return (
-        <Routes>
-            <Route path='*' element={<Login />} />
-            <Route path='/app/*' element={<App />} />
-            <Route path='/home' element={<Home />} />
-            <Route path='/perfil' element={<UserProfile />} />
-            <Route path='/inicio/*' element={<InicioApp />} />
-            <Route path='/carrusel' element={<CarruselMessi />} />
-            <Route path='/crear-usuario' element = {<UserForm />} />
-            <Route path='/usuarios' element = {<UserTable />} />
-            <Route path='/actualizarUsuario/:id'element= {<UserUpdateForm />} />
-            <Route path='/eliminarUsuario/:id'element= {<EliminarUser />} />
-        </Routes>
+            <Routes>
+                {/* <Route element={<ProtectedRoute />}> */}
+                    <Route path='/app/*' element={<App />} />
+                    <Route path='/perfil' element={<UserProfile />} />
+                    <Route path='/inicio/*' element={<InicioApp />} />
+                    <Route path='/carrusel' element={<CarruselMessi />} />
+                    <Route path='/publicaciones' element={<PagesPosts />} />
+                    <Route path='/crear-usuario' element = {<UserForm />} />
+                    <Route path='/usuarios' element = {<UserTable />} />
+                    <Route path='/actualizarUsuario/:id'element= {<UserUpdateForm />} />
+                    <Route path='/eliminarUsuario/:id'element= {<EliminarUser />} />
+                {/* </Route> */}
+                <Route path='*' element={<Login />} />
+                <Route path='/home' element={<Home />} />
+            </Routes>
     )
 }

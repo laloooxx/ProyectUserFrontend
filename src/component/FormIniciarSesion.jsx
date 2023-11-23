@@ -118,7 +118,7 @@ function FormLogin() {
                     </span>
                     <span className="p-float-label">
                         <Password value={password} onChange={(e) => setPassword(e.target.value)} toggleMask />
-                        <label htmlFor="password" style={{paddingLeft: '30px'}}>Contraseña</label>
+                        <label htmlFor="password" style={{paddingLeft: '80px'}}>Contraseña</label>
                     </span>
                     <Button type="submit" label="Iniciar Sesion" />
                 </form>

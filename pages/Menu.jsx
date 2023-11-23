@@ -11,6 +11,8 @@ import ItemWithoutThumbnailsDemo from '../src/component/Carrusel';
 import UserTable from '../src/component/UserTable';
 import UserProfile from '../src/component/UserProfile';
 import LogOutUser from '../src/component/LogOutUser';
+import PagesPosts from './Publicaciones';
+
 
 function TabPanel(props) {  
   const { children, value, index, ...other } = props;
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     position: 'fixed',
     top: 0,
-    width: '100%'
+    width: '100%',
   },
 }));
 
@@ -58,53 +60,59 @@ function a11yProps(index) {
 
 
 //menu de material-ui
-export default function Menu() {
+export default function Menu({ mostrarCarrusel, onMostrarCarrusel }) {
   const [currentPage, setCurrentPage] = useState('carrusel');
-
 
   const handleTabClick = (event, newValue) => {
     setCurrentPage(newValue);
+
+    onMostrarCarrusel(newValue === 'carrusel');
   };
 
-  
   const classes = useStyles();
-
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs
-          value = {currentPage}
+          value={currentPage}
           onChange={handleTabClick}
           aria-label="nav tabs example"
         >
           <Tab
             label="Inicio"
-            value = "carrusel"
+            value="carrusel"
           />
           <Tab
             label="Lista de Usuarios"
-            value = "usuarios"
+            value="usuarios"
           />
           <Tab
             label="Perfil de Usuario"
-            value = "perfil"
-          /> 
+            value="perfil"
+          />
           <Tab
-            label= "Cerrar sesion"
+            label="Publicaciones"
+            value="publicaciones"
+          />
+          <Tab
+            label="Cerrar sesión"
             value="cerrar sesion"
           />
         </Tabs>
       </AppBar>
       <TabPanel value={currentPage} index="carrusel">
-        <ItemWithoutThumbnailsDemo />
+        {/* Contenido opcional del carrusel si es necesario */}
       </TabPanel>
       <TabPanel value={currentPage} index="usuarios">
         <UserTable />
       </TabPanel>
       <TabPanel value={currentPage} index="perfil">
         <UserProfile />
-      </TabPanel> 
+      </TabPanel>
+      <TabPanel value={currentPage} index="publicaciones">
+        <PagesPosts />
+      </TabPanel>
       <TabPanel value={currentPage} index="cerrar sesion">
         <LogOutUser />
       </TabPanel>

@@ -6,7 +6,15 @@ const API_URL_PUBLICACIONES = 'http://localhost:3000/publicaciones'
 
 export async function getPublicaciones() {
     const url = API_URL_PUBLICACIONES;
-    await axios.get(url);
+    try {
+        const response = await axios.get(url);
+        console.log(response); // Imprime la respuesta completa en la consola
+        const publicaciones=  response.data.publicaciones;
+        return publicaciones;
+    } catch (error) {
+        console.error("Error al obtener publicaciones:", error);
+        throw error;
+    }
 };
 
 
@@ -23,20 +31,21 @@ export async function getPublicacionesById(id) {
 };
 
 
-export async function createPublicacion({ fecha, descripcion, ubicacion, imagen}) {
+export async function createPublicacion({ fecha, descripcion, ubicacion, horas, imagen}) {
     const url = API_URL_PUBLICACIONES;
-    await axios.post(url, { fecha, descripcion, ubicacion, imagen });
-
-    return
+    const response = await axios.post(url, { fecha, descripcion, ubicacion, horas, imagen });
+    return response.data;
 };
 
 
 export async function updatePublicacion({ id, postData }) {
     const url = `${API_URL_PUBLICACIONES}/${id}`;
-    await axios.put(url, postData);
+    const response = await axios.put(url, postData);
+    return response.data;
 };
 
 export async function deletePublicacion( id ) {
     const url = `${API_URL_PUBLICACIONES}/${id}`;
-    await axios.delete(url, id);
+    const response = await axios.delete(url, id);
+    return response.data;
 }

@@ -1,4 +1,4 @@
-# Proyecto de Gestión de Usuarios
+# Proyecto de Gestión de Usuarios FrontEnd
 
 Este es un proyecto de gestión de usuarios realizado con React y Node.js. La aplicación permite a los usuarios iniciar sesión, visualizar y gestionar usuarios, así como realizar publicaciones.
 

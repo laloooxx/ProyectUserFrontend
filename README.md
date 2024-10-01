@@ -34,14 +34,15 @@ Para instalar y ejecutar este proyecto en tu entorno local, sigue estos pasos:
    npm run dev
 
 
-Uso: 
+## Uso
+
 La aplicación permite a los usuarios registrarse y realizar login.
 Los usuarios pueden ver una lista de otros usuarios y sus perfiles.
 Se puede gestionar la creación, actualización y eliminación de usuarios.
 Las publicaciones son accesibles a través de rutas específicas.
 
 
-Contribuciones
+## Contribuciones
 Las contribuciones son bienvenidas. Si deseas contribuir, sigue estos pasos:
 
 Haz un fork del repositorio.

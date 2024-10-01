@@ -22,7 +22,6 @@ export default function AppRoutes() {
             <Routes>
                 <Route element={<ProtectedRoute />}>
                     <Route path='/app/*' element={<App />} />
-                </Route>
                     <Route path='/perfil' element={<UserProfile />} />
                     <Route path='/inicio/*' element={<InicioApp />} />
                     <Route path='/carrusel' element={<CarruselMessi />} />
@@ -31,6 +30,7 @@ export default function AppRoutes() {
                     <Route path='/usuarios' element = {<UserTable />} />
                     <Route path='/actualizarUsuario/:id'element= {<UserUpdateForm />} />
                     <Route path='/eliminarUsuario/:id'element= {<EliminarUser />} />
+                </Route>
                 <Route path='*' element={<Login />} />
                 <Route path='/home' element={<Home />} />
             </Routes>

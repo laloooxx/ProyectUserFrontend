@@ -44,13 +44,13 @@ function FormLogin() {
             email: email,
             password: password
         }
+        
 
 
         //creamos una funcion para manejar los errores y no errores
         try {
             //guardamos en una constante la verificacion de datos
             const response = await verifyUser(data);
-            console.log("resp de la data con el token del verifyuser ",response.data.token);
             
             //creamos una constante donde vamos a almacenar el token
             const token = response.data.token;
@@ -58,11 +58,9 @@ function FormLogin() {
 
             //creamos una constante donde vamos a almacenar el id q recuperamos del token
             const { id } = ParseToken(token);
-            console.log('id:', id);
 
             //creamos una constante donde vamos a almacenar la respuesa q devuelve con la data q trae
             const result = response.data;
-            console.log("respuesta del verify user con la data ", result);
 
             //seteamos los datos y definimos q es un array
             setUsers(prev => {
@@ -74,7 +72,6 @@ function FormLogin() {
             });
             
 
-            console.log(result.token); 
             //consultamos si devuelve el token al recuperar los datos y si es asi seteamos el token y cambiamos el estado del formulario y navegamos a otra pagina
             if (result.token) {
                 localStorage.setItem('token', result.token)
@@ -90,7 +87,6 @@ function FormLogin() {
             };
             //en caso de q haya error lo manejamos x aca
         } catch (error) {
-            console.log('Error al verificar el usuario', error);
             if (error.response && error.response.status === 401) {
                 setPasswordError("Correo electronico o contraseñas incorrectos")
             } else {

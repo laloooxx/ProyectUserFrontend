@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
       return (
           <div className={classes.root}>
       <h1>Publicaciones</h1>
-      {/* Otras cosas que puedas querer agregar en tu página */}
       <CardPublicaciones />
     </div>
   );

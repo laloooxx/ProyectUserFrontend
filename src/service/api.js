@@ -7,7 +7,13 @@ const API_URL_Users = 'http://localhost:3000/users';
 //creamos la funcion para mostrar usuarios
 export async function getUsers() {
     try {
-        const response = await axios.get(API_URL_Users);
+
+        const response = await axios.get(API_URL_Users,
+            // headers: {
+            //     'Authorization': ''
+            // }
+        );
+
         const data = response.data;
         
         if (Array.isArray(data.users)) {
@@ -50,11 +56,17 @@ export async function getUserById(id) {
 
 //creamos la funcion para crear usuarios
 export async function createUser({username, password, email}) {
+    console.log('Iniciando createUser con:', { username, password, email });
     try {
-        const response = await axios.post('http://localhost:3000/users', { username, password, email });
+        const response = await axios.post('http://localhost:3000/auth/register', { username, password, email });
+        console.log('Respuesta de createUser desdde la api:', response);
         return response;
     } catch (error) {
-        throw error;
+        if (error.response && error.response.status === 404) {
+            console.error('Error: La ruta no existe. Verifica la URL de la API.');
+        } else {
+            console.error('Error en createUser:', error.response ? error.response.data : error.message);
+        }
     }
 }
 
@@ -78,7 +90,7 @@ export async function deleteUser(id) {
 
 //creamos la funcion para verificar usuarios en mi backend
 export async function verifyUser({ email, password }) {
-    const url = `http://localhost:3000/login`;
+    const url = `http://localhost:3000/auth/login`;
 
     try {
         const response = await axios.post(url, { email, password });
